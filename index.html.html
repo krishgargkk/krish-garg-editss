@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Krish Garg — Video Editor & Post-Production</title>
+  <meta name="description"
+    content="Portfolio of Krish Garg, video editor: high-energy commercials, short-form reels, documentaries, color grading and sound design.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0B0F0D;
+      --bg-soft: #121815;
+      --panel: #161D19;
+      --line: #26302B;
+      --text: #F4F0E6;
+      --muted: #8B958E;
+      --orange: #FF6B35;
+      --teal: #2DD4BF;
+      --teal-deep: #0F5C54;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--orange);
+      color: #0B0F0D;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+    }
+
+    .display {
+      font-family: 'Anton', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    section {
+      position: relative;
+    }
+
+    /* Letterbox bars */
+    .letterbox-top,
+    .letterbox-bottom {
+      height: 14px;
+      background: #000;
+      position: relative;
+      z-index: 5;
+    }
+
+    .letterbox-top::after,
+    .letterbox-bottom::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(90deg, transparent, transparent 38px, rgba(255, 255, 255, 0.05) 38px, rgba(255, 255, 255, 0.05) 39px);
+    }
+
+    /* NAV */
+    header {
+      position: fixed;
+      top: 14px;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 18px 0;
+    }
+
+    header .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Anton', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.06em;
+    }
+
+    .logo span {
+      color: var(--orange);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 36px;
+    }
+
+    nav a {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      transition: color .25s;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      border: 1px solid var(--line);
+      padding: 9px 18px;
+      border-radius: 100px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: all .25s;
+    }
+
+    .nav-cta:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .nav-toggle {
+      display: none;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 150px 0 90px;
+      background:
+        radial-gradient(ellipse 900px 500px at 78% 10%, rgba(45, 212, 191, 0.10), transparent 60%),
+        radial-gradient(ellipse 700px 500px at 10% 90%, rgba(255, 107, 53, 0.08), transparent 60%);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+    }
+
+    .eyebrow .pipe {
+      opacity: .4;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(56px, 8vw, 108px);
+      line-height: 0.92;
+      color: var(--text);
+    }
+
+    .hero h1 .accent {
+      background: linear-gradient(90deg, var(--orange), var(--teal));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-family: 'Anton', sans-serif;
+      text-transform: uppercase;
+      font-size: 22px;
+      color: var(--teal);
+      letter-spacing: 0.03em;
+      margin-top: 14px;
+    }
+
+    .hero-copy {
+      margin-top: 22px;
+      max-width: 480px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .avail-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 28px;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .avail-badge .ring {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.18);
+    }
+
+    .portrait-panel {
+      aspect-ratio: 4/5;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #1a231f, #0d1210 70%);
+      border: 1px solid var(--line);
+    }
+
+    .portrait-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.55) 100%),
+        repeating-linear-gradient(180deg, transparent 0 3px, rgba(255, 255, 255, 0.02) 3px 4px);
+    }
+
+    .portrait-panel .frame-label {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .portrait-panel .frame-label.right {
+      left: auto;
+      right: 14px;
+    }
+
+    .portrait-panel .rec {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--orange);
+    }
+
+    .portrait-panel .rec .d {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: pulse 1.6s infinite;
+    }
+
+    @keyframes pulse {
+      50% {
+        opacity: .25;
+      }
+    }
+
+    .portrait-panel .initials {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Anton', sans-serif;
+      font-size: 120px;
+      letter-spacing: 0.02em;
+      background: linear-gradient(160deg, var(--teal) 0%, transparent 55%),
+        linear-gradient(340deg, var(--orange) 0%, transparent 55%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: rgba(244, 240, 230, 0.14);
+      -webkit-text-stroke: 1px rgba(244, 240, 230, 0.25);
+    }
+
+    .stats-bar {
+      margin-top: 70px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stats-bar div {
+      padding: 26px 8px;
+      text-align: center;
+      border-right: 1px solid var(--line);
+    }
+
+    .stats-bar div:last-child {
+      border-right: none;
+    }
+
+    .stats-bar .num {
+      font-family: 'Anton', sans-serif;
+      font-size: 34px;
+      color: var(--orange);
+    }
+
+    .stats-bar .label {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    /* SECTION HEADS */
+    .section-pad {
+      padding: 110px 0;
+    }
+
+    .sec-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 26px;
+    }
+
+    .sec-head .tag {
+      font-size: 12px;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 10px;
+    }
+
+    .sec-head h2 {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(32px, 4.4vw, 48px);
+      text-transform: uppercase;
+    }
+
+    .sec-head a {
+      font-size: 13px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 3px;
+    }
+
+    .sec-head a:hover {
+      color: var(--orange);
+      border-color: var(--orange);
+    }
+
+    /* PROJECTS TIMELINE */
+    .project-row {
+      display: grid;
+      grid-template-columns: 64px 220px 1fr auto;
+      align-items: center;
+      gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+      transition: background .25s;
+    }
+
+    .project-row:hover {
+      background: rgba(255, 107, 53, 0.04);
+    }
+
+    .project-row .tc {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .project-row .ptitle {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .project-row .pmeta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .project-row .arrow {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all .25s;
+      flex-shrink: 0;
+    }
+
+    .project-row:hover .arrow {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #0B0F0D;
+      transform: rotate(45deg);
+    }
+
+    .thumb {
+      width: 220px;
+      aspect-ratio: 16/10;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--line);
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--thumb-a, #1a231f), var(--thumb-b, #0d1210) 75%);
+    }
+
+    .thumb img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .35s ease;
+    }
+
+    .project-row:hover .thumb img {
+      transform: scale(1.05);
+    }
+
+    .thumb::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(180deg, transparent 0 3px, rgba(255, 255, 255, 0.025) 3px 4px);
+    }
+
+    .thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), transparent 55%);
+    }
+
+    .thumb .play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(11, 15, 13, 0.55);
+      border: 1px solid rgba(244, 240, 230, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: all .25s;
+    }
+
+    .thumb .play::after {
+      content: '';
+      width: 0;
+      height: 0;
+      margin-left: 2px;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 8px solid var(--text);
+    }
+
+    .project-row:hover .thumb .play {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .project-row:hover .thumb .play::after {
+      border-left-color: #0B0F0D;
+    }
+
+    .thumb .tformat {
+      position: absolute;
+      bottom: 5px;
+      left: 6px;
+      font-size: 9px;
+      letter-spacing: 0.03em;
+      color: rgba(244, 240, 230, 0.7);
+      z-index: 2;
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .service-card {
+      background: var(--bg);
+      padding: 38px 30px;
+    }
+
+    .service-card .num {
+      color: var(--teal);
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    .service-card h3 {
+      font-family: 'Anton', sans-serif;
+      font-size: 24px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.65;
+    }
+
+    /* SKILLS MARQUEE */
+    .marquee-wrap {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+      padding: 26px 0;
+      background: var(--bg-soft);
+    }
+
+    .marquee {
+      display: flex;
+      gap: 50px;
+      width: max-content;
+      animation: scroll 24s linear infinite;
+    }
+
+    .marquee span {
+      font-family: 'Anton', sans-serif;
+      font-size: 22px;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .marquee span em {
+      color: var(--orange);
+      font-style: normal;
+    }
+
+    @keyframes scroll {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .workflow-line {
+      margin-top: 34px;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .workflow-line .k {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-panel {
+      aspect-ratio: 5/6;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      background: linear-gradient(200deg, #12201d, #0b0f0d 65%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-panel .scan {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(180deg, transparent 0 3px, rgba(255, 255, 255, 0.02) 3px 4px);
+    }
+
+    .about-panel .grade-split {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, rgba(45, 212, 191, 0.14) 0%, transparent 45%, rgba(255, 107, 53, 0.14) 100%);
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    blockquote {
+      border-left: 2px solid var(--orange);
+      padding-left: 22px;
+      margin-top: 10px;
+    }
+
+    blockquote p {
+      font-size: 19px;
+      color: var(--text);
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    blockquote cite {
+      display: block;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      font-style: normal;
+    }
+
+    /* CONTACT */
+    .contact-section {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--line);
+    }
+
+    .contact-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 50px;
+    }
+
+    .contact-head .tag {
+      font-size: 12px;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 16px;
+    }
+
+    .contact-head h2 {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(36px, 6vw, 64px);
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .contact-head p {
+      color: var(--muted);
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .cta-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 56px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--orange);
+      color: #0B0F0D;
+      padding: 18px 34px;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: transform .25s;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .contact-links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .contact-links a {
+      background: var(--bg-soft);
+      padding: 24px;
+      text-align: center;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: background .25s;
+    }
+
+    .contact-links a:hover {
+      background: rgba(255, 107, 53, 0.06);
+      color: var(--orange);
+    }
+
+    .contact-links a .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    footer {
+      padding: 44px 0;
+    }
+
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .foot-left {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .foot-socials {
+      display: flex;
+      gap: 24px;
+    }
+
+    .foot-socials a {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .foot-socials a:hover {
+      color: var(--orange);
+    }
+
+    .foot-loc {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .foot-loc .ring {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    @media (max-width:860px) {
+
+      nav,
+      .nav-cta {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 130px;
+      }
+
+      .hero-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        gap: 40px;
+      }
+
+      .stats-bar {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-bar div {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .stats-bar div:last-child {
+        border-bottom: none;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-row {
+        grid-template-columns: 80px 1fr auto;
+        gap: 14px;
+      }
+
+      .project-row .tc {
+        display: none;
+      }
+
+      .thumb {
+        width: 120px;
+      }
+
+      .project-row .ptitle {
+        font-size: 16px;
+      }
+
+      .contact-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="letterbox-top"></div>
+
+  <header>
+    <div class="wrap">
+      <div class="logo">KRISH<span>.</span>GARG</div>
+      <nav>
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="nav-cta" href="https://wa.me/919571050663" target="_blank" rel="noopener">Start a project</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow">
+          <span>Video Editor</span><span class="pipe">/</span>
+          <span>Digital Creator</span><span class="pipe">/</span>
+          <span class="dot"></span><span>Available for freelance</span>
+        </div>
+
+        <div class="hero-grid">
+          <div>
+            <p class="mono" style="color:var(--muted); font-size:13px; margin-bottom:10px;">Hello, I'm</p>
+            <h1 class="display">KRISH<br><span class="accent">GARG</span></h1>
+            <p class="hero-sub">Video Editor &amp; Digital Creator</p>
+            <p class="hero-copy">I’m a creative video editor focused on storytelling, emotion, and intentional visual
+              choices. I believe great editing isn’t about more effects — it’s about making the story feel something.
+            </p>
+            <div class="avail-badge"><span class="ring"></span> Available worldwide</div>
+          </div>
+
+          <div class="portrait-panel">
+            <div class="scan" style="position:absolute; inset:0;"></div>
+            <span class="frame-label mono">00:00:00:00</span>
+            <span class="frame-label mono right"> · 23.976</span>
+            <div class="initials"><img src="photo_2026-07-11_11-43-26.jpg" alt="">
+            </div>
+            <span class="rec mono"><span class="d"></span> </span>
+          </div>
+        </div>
+
+        <div class="stats-bar">
+          <div>
+            <div class="num">6+</div>
+            <div class="label">month job experience in news company</div>
+          </div>
+          <div>
+            <div class="num">1.5+</div>
+            <div class="label">years freelance experience</div>
+          </div>
+          <div>
+            <div class="num">100+</div>
+            <div class="label">videos edited during job</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="section-pad">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <div class="tag">Portfolio</div>
+            <h2>Selected Projects</h2>
+            <h3></h3>
+          </div>
+          <a href="" target="_blank" rel="noopener">View all projects →</a>
+        </div>
+
+        <div class="project-list">
+          <a class="project-row" href="https://www.instagram.com/reel/DbqJcLtCtTM/" target="_blank" rel="noopener">
+            <span class="tc mono"></span>
+            <span class="thumb" style="--thumb-a:#2a1a14; --thumb-b:#030303;"><img src="backbone.jpg"
+                alt="Education is back bone of india thumbnail" onerror="this.remove()"><span class="play"></span><span
+                class="tformat mono">REEL</span></span>
+            <span><span class="ptitle">Education is back bone of india </span><span class="pmeta">podcast intro —
+                Premiere Pro &amp; AI</span></span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="project-row" href="https://www.instagram.com/reel/DansQ8ElDrp/" target="_blank" rel="noopener">
+            <span class="tc mono"></span>
+            <span class="thumb" style="--thumb-a:#132420; --thumb-b:#0d1210;"><img src="orignal vs me.jpg"
+                alt="ps rajput intro reedite thumbnail" onerror="this.remove()"><span class="play"></span><span
+                class="tformat mono">REEL</span></span>
+            <span><span class="ptitle">ps rajput intro reedite </span><span class="pmeta">orignal vs me — After
+                Effects</span></span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="project-row" href="https://www.instagram.com/reel/Db7uBwGFsPn/" target="_blank" rel="noopener">
+            <span class="tc mono"></span>
+            <span class="thumb" style="--thumb-a:#241a2a; --thumb-b:#0d1210;"><img src="the edit.jpg"
+                alt="pratham sagar edit workflow thumbnail" onerror="this.remove()"><span class="play"></span><span
+                class="tformat mono">SHORT</span></span>
+            <span><span class="ptitle">pratham sagar edit workflow</span><span class="pmeta"> podcast clip to a short
+                mini video
+              </span></span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="project-row"
+            href="https://www.instagram.com/reel/DX1ZjoyDxVg/?igsh=ajl4YzQ5aWE5cnpx&igsi=ajl4YzQ5aWE5cnpx"
+            target="_blank" rel="noopener">
+            <span class="tc mono"></span>
+            <span class="thumb" style="--thumb-a:#1a2314; --thumb-b:#0d1210;"><img src="corpreat.png"
+                alt="corporate style video editing thumbnail" onerror="this.remove()"><span class="play"></span><span
+                class="tformat mono">DOC</span></span>
+            <span><span class="ptitle">corporate style video editing</span><span class="pmeta"> Long Form — Cinematic
+                documentary,
+                for corporate office</span></span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="project-row"
+            href="https://www.instagram.com/reel/Da5OLE6vdBE/?igsh=MXB2eDYyZG5qMTdrZQ==&igsi=MXB2eDYyZG5qMTdrZQ=="
+            target="_blank" rel="noopener">
+            <span class="tc mono"></span>
+            <span class="thumb" style="--thumb-a:#141f24; --thumb-b:#0d1210;"><img
+                src="visa master changes v3  .mp4.00_00_26_38.Still001.jpg" alt="viral promotion edit thumbnail"
+                onerror="this.remove()"><span class="play"></span><span class="tformat mono">DOC</span></span>
+            <span><span class="ptitle">viral promotion edit</span><span class="pmeta">Long Form — Cinematic documentary,
+                second 2 minutes</span></span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section-pad" style="padding-top:0;">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <div class="tag">What I Do</div>
+            <h2>Expert Services</h2>
+          </div>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="num mono">01</div>
+            <h3>Video Editing</h3>
+            <p>Story-driven editing that keeps audiences engaged from start to finish.</p>
+          </div>
+          <div class="service-card">
+            <div class="num mono">02</div>
+            <h3>Short and long form editing</h3>
+            <p>Optimized edits for Reels and Shorts and youtube videos built for high retention.</p>
+          </div>
+          <div class="service-card">
+            <div class="num mono">03</div>
+            <h3>Post-Production</h3>
+            <p>Professional color grading and cinematic sound design to polish your video.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="marquee-wrap">
+        <div class="marquee">
+          <span>
+            <em>Premiere Pro</em> · After Effects · <em>DaVinci Resolve</em> · Motion Graphics · <em>Color Grading</em>
+            · Sound Design · <em>AI Workflows</em> · Short-Form Editing ·
+          </span>
+          <span>
+            <em>Premiere Pro</em> · After Effects · <em>DaVinci Resolve</em> · Motion Graphics · <em>Color Grading</em>
+            · Sound Design · <em>AI Workflows</em> · Short-Form Editing ·
+          </span>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="workflow-line">
+          <span class="k">Workflow —</span>
+          <span>Brief → assembly → sound &amp; graphics → grade → delivery. Fast revisions, files organised, deadlines
+            respected.</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section-pad">
+      <div class="wrap about-grid">
+        <div class="about-panel">
+          <div class="scan"></div>
+          <div class="grade-split"><img src="ChatGPT Image Aug 17, 2026, 09_37_15 AM.png" alt="Italian Trulli"></div>
+        </div>
+        <div class="about-copy">
+          <div class="tag"
+            style="color:var(--teal); font-size:12px; text-transform:uppercase; letter-spacing:0.14em; margin-bottom:16px;">
+            Behind the Edit</div>
+          <p>I'm a video editor who transforms raw footage into engaging, emotionally compelling content. I believe
+            editing goes beyond effects — it's about storytelling that connects deeply with the audience. Every cut,
+            every beat and every frame of colour is chosen to keep people watching.</p>
+          <blockquote>
+            <p>““Very creative, with an incredible eye for detail. He always brings a fresh perspective to the edit.”
+              .”</p>
+            <cite>— Brand Booste Agency Owner</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section-pad contact-section">
+      <div class="wrap">
+        <div class="contact-head">
+          <div class="tag">Let's create magic</div>
+          <h2>Let's create<br>something great together.</h2>
+          <p>Ready to take your content to the next level? I'm currently open for new projects and collaborations.</p>
+        </div>
+        <div class="cta-row">
+          <a class="cta-btn" href="https://wa.me/919571050663" target="_blank" rel="noopener">→ Start a project</a>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:onlykrishgarg@gmail.com">
+            <span class="label">Email</span>
+            <span>onlykrishgarg@gmail.com</span>
+          </a>
+          <a href="https://wa.me/919571050663" target="_blank" rel="noopener">
+            <span class="label">Phone</span>
+            <span>+91 95710 50663</span>
+          </a>
+          <a href="https://t.me/Krishgargqqq" target="_blank" rel="noopener">
+            <span class="label">Telegram</span>
+            <span>@Krishgargqqq</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-left">© 2026 Krish Garg — Video Editor — Available for freelance</div>
+      <div class="foot-socials">
+        <a href="https://youtube.com/@krishgarg-y2j" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://instagram.com/krishgarg_edits" target="_blank" rel="noopener">Instagram</a>
+
+
+      </div>
+      <div class="foot-loc"><span class="ring"></span> India — working worldwide</div>
+    </div>
+  </footer>
+
+  <div class="letterbox-bottom"></div>
+
+</body>
+
+</html>
