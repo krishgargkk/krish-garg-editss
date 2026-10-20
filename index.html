@@ -364,141 +364,48 @@
       border-color: var(--orange);
     }
 
-    /* PROJECTS TIMELINE */
-    .project-row {
-      display: grid;
-      grid-template-columns: 64px 220px 1fr auto;
-      align-items: center;
-      gap: 24px;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--line);
-      transition: background .25s;
-    }
+    /* PROJECTS GRID */
+    .project-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 22px; }
+    .pcard { grid-column: span 3; position: relative; cursor: pointer; border-radius: 14px; outline: none; transition: transform .3s ease; }
+    .pcard.wide { grid-column: span 8; }
+    .pcard:hover, .pcard:focus-visible { transform: translateY(-6px); }
+    .pthumb { position: relative; width: 100%; aspect-ratio: 9/16; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: linear-gradient(135deg, #2a201b, #120e0c 75%); transition: border-color .3s, box-shadow .3s; }
+    .pcard.wide .pthumb { aspect-ratio: 16/9; }
+    .pcard:hover .pthumb, .pcard:focus-visible .pthumb { border-color: var(--orange); box-shadow: 0 18px 44px rgba(212, 91, 44, .22); }
+    .pthumb img, .pthumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pthumb img { transition: transform .5s ease; }
+    .pcard:hover .pthumb img { transform: scale(1.06); }
+    .pthumb video { z-index: 1; opacity: 0; transition: opacity .3s; }
+    .pthumb.is-playing video { opacity: 1; }
+    .pthumb::after { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(0deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.35) 32%, transparent 58%); }
+    .pbadge { position: absolute; top: 12px; left: 12px; z-index: 3; font-size: 11px; letter-spacing: .08em; padding: 5px 10px; border-radius: 100px; background: rgba(23,18,16,.7); border: 1px solid rgba(244,240,230,.25); backdrop-filter: blur(6px); }
+    .pplay { position: absolute; top: 50%; left: 50%; z-index: 3; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: rgba(23,18,16,.55); border: 1.5px solid rgba(244,240,230,.55); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; transition: all .3s; }
+    .pplay::after { content: ''; margin-left: 4px; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 16px solid var(--text); transition: border-color .3s; }
+    .pcard:hover .pplay, .pcard:focus-visible .pplay { background: var(--orange); border-color: var(--orange); transform: scale(1.12); }
+    .pcard:hover .pplay::after, .pcard:focus-visible .pplay::after { border-left-color: #171210; }
+    .pthumb.is-playing .pplay { opacity: 0; }
+    .pinfo { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 18px; pointer-events: none; }
+    .pinfo .ptitle { display: block; font-size: 19px; font-weight: 600; line-height: 1.25; }
+    .pinfo .pmeta { display: block; font-size: 13px; color: rgba(244,240,230,.72); margin-top: 6px; line-height: 1.4; }
+    .pcard.wide .pinfo .ptitle { font-size: 24px; }
+    .pcta { grid-column: span 4; border: 1px dashed var(--line); border-radius: 14px; padding: 28px; display: flex; flex-direction: column; justify-content: center; gap: 14px; transition: border-color .3s, background .3s; }
+    .pcta:hover { border-color: var(--orange); background: rgba(212,91,44,.05); }
+    .pcta h3 { font-family: 'Anton', sans-serif; text-transform: uppercase; font-size: 28px; line-height: 1.15; }
+    .pcta p { color: var(--muted); font-size: 15px; line-height: 1.6; }
+    .pcta span { color: var(--orange); font-weight: 600; }
 
-    .project-row:hover {
-      background: rgba(212, 91, 44, 0.04);
-    }
-
-    .project-row .tc {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .project-row .ptitle {
-      font-size: 22px;
-      font-weight: 600;
-    }
-
-    .project-row .pmeta {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .project-row .arrow {
-      width: 38px;
-      height: 38px;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      transition: all .25s;
-      flex-shrink: 0;
-    }
-
-    .project-row:hover .arrow {
-      background: var(--orange);
-      border-color: var(--orange);
-      color: #171210;
-      transform: rotate(45deg);
-    }
-
-    .thumb {
-      width: 220px;
-      aspect-ratio: 16/10;
-      border-radius: 8px;
-      overflow: hidden;
-      position: relative;
-      border: 1px solid var(--line);
-      flex-shrink: 0;
-      background: linear-gradient(135deg, var(--thumb-a, #2a201b), var(--thumb-b, #120e0c) 75%);
-    }
-
-    .thumb img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform .35s ease;
-    }
-
-    .project-row:hover .thumb img {
-      transform: scale(1.05);
-    }
-
-    .thumb::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(180deg, transparent 0 3px, rgba(255, 255, 255, 0.025) 3px 4px);
-    }
-
-    .thumb::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), transparent 55%);
-    }
-
-    .thumb .play {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: rgba(23, 18, 16, 0.55);
-      border: 1px solid rgba(244, 240, 230, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
-      transition: all .25s;
-    }
-
-    .thumb .play::after {
-      content: '';
-      width: 0;
-      height: 0;
-      margin-left: 2px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 8px solid var(--text);
-    }
-
-    .project-row:hover .thumb .play {
-      background: var(--orange);
-      border-color: var(--orange);
-    }
-
-    .project-row:hover .thumb .play::after {
-      border-left-color: #171210;
-    }
-
-    .thumb .tformat {
-      position: absolute;
-      bottom: 5px;
-      left: 6px;
-      font-size: 9px;
-      letter-spacing: 0.03em;
-      color: rgba(244, 240, 230, 0.7);
-      z-index: 2;
-    }
+    /* VIDEO MODAL */
+    .vmodal { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(8,6,5,.88); backdrop-filter: blur(8px); }
+    .vmodal.open { display: flex; }
+    .vbox { position: relative; width: min(420px, 92vw); max-height: 92vh; }
+    .vbox.landscape { width: min(980px, 94vw); }
+    .vframe { width: 100%; height: min(78vh, 740px); border: 0; border-radius: 12px; background: #000; display: block; }
+    .vbox.landscape .vframe { height: auto; aspect-ratio: 16/9; }
+    .vclose { position: absolute; top: -44px; right: 0; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel); color: var(--text); font-size: 18px; cursor: pointer; }
+    .vclose:hover { background: var(--orange); border-color: var(--orange); color: #171210; }
+    .vopen { display: block; text-align: center; margin-top: 12px; font-size: 14px; color: var(--muted); }
+    .vopen:hover { color: var(--orange); }
+    .vsoon { padding: 30px; text-align: center; color: var(--muted); }
 
     /* SERVICES */
     .services-grid {
@@ -807,23 +714,14 @@
       .services-grid {
         grid-template-columns: 1fr;
       }
-
-      .project-row {
-        grid-template-columns: 80px 1fr auto;
-        gap: 14px;
-      }
-
-      .project-row .tc {
-        display: none;
-      }
-
-      .thumb {
-        width: 120px;
-      }
-
-      .project-row .ptitle {
-        font-size: 16px;
-      }
+      .project-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .pcard, .pcard.wide, .pcta { grid-column: span 2; }
+      .pcard:not(.wide) { grid-column: span 1; }
+      .pinfo { padding: 12px; }
+      .pinfo .ptitle { font-size: 15px; }
+      .pcard.wide .pinfo .ptitle { font-size: 18px; }
+      .pinfo .pmeta { font-size: 11.5px; }
+      .pplay { width: 50px; height: 50px; margin: -25px 0 0 -25px; }
 
       .contact-links {
         grid-template-columns: 1fr;
@@ -842,13 +740,6 @@
     .grade-split { z-index: 2; pointer-events: none; }
     :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 
-    .stats-bar { margin-top: 70px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .stats-bar > div { padding: 28px 24px; text-align: left; border-right: 1px solid var(--line); }
-    .stats-bar > div:last-child { border-right: none; }
-    .stats-bar .num { font-family: 'Anton', sans-serif; font-size: 24px; line-height: 1.1; text-transform: uppercase; }
-    .stats-bar .num em { font-style: normal; color: var(--orange); }
-    .stats-bar .label { font-size: 14px; color: var(--muted); margin-top: 12px; line-height: 1.6; }
-
     .wid-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 64px; align-items: start; }
     .wid-lead .big { font-family: 'Anton', sans-serif; text-transform: uppercase; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.15; }
     .wid-lead .big em { font-style: normal; color: var(--orange); }
@@ -865,9 +756,6 @@
       .nav-toggle { display: block; }
       header.open nav { display: block; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-soft); border-bottom: 1px solid var(--line); padding: 18px 32px; }
       header.open nav ul { flex-direction: column; gap: 18px; }
-      .stats-bar { grid-template-columns: 1fr 1fr; }
-      .stats-bar > div:nth-child(2) { border-right: none; }
-      .stats-bar > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
       .wid-grid { grid-template-columns: 1fr; gap: 40px; }
       .logo-text { font-size: 17px; }
     }
@@ -926,13 +814,6 @@
             <span class="rec mono"><span class="d"></span> </span>
           </div>
         </div>
-
-        <div class="stats-bar">
-          <div><div class="num">Story first</div><div class="label">Every cut is chosen to serve the story, not to show off effects.</div></div>
-          <div><div class="num">worked for </div><div class="label">Reels, Shorts,YouTube,advertising and short corprate documentarie.</div></div>
-          <div><div class="num">worked with</div><div class="label">news company,social media creators and agency owners.</div></div>
-          <div><div class="num">Real client work</div><div class="label">brand and documentary-style edits, shown in the projects below.</div></div>
-        </div>
       </div>
     </section>
 
@@ -975,54 +856,51 @@
           <a href="https://instagram.com/krishgarg_edits" target="_blank" rel="noopener">More on Instagram →</a>
         </div>
 
-        <div class="project-list">
-          <a class="project-row" href="https://www.instagram.com/reel/Db7uBwGFsPn/" target="_blank" rel="noopener">
-            <span class="tc mono"></span>
-            <span class="thumb" style="--thumb-a:#2a1d17; --thumb-b:#030303;"><img src="the edit.jpg"
-                alt="Education is back bone of india thumbnail" onerror="this.remove()"><span class="play"></span><span
-                class="tformat mono">REEL</span></span>
-            <span><span class="ptitle">Pratham Sagar — edit workflow</span><span class="pmeta">Podcast intro —
-                Premiere Pro &amp; AI</span></span>
-            <span class="arrow">→</span>
-          </a>
-          <a class="project-row" href="" target="_blank" rel="noopener">
-            <span class="tc mono"></span>
-            <span class="thumb" style="--thumb-a:#2a1d17; --thumb-b:#120e0c;"><img src="orignal vs me.jpg"
-                alt="ps rajput intro reedite thumbnail" onerror="this.remove()"><span class="play"></span><span
-                class="tformat mono">REEL</span></span>
-            <span><span class="ptitle">PS Rajput — intro re-edit</span><span class="pmeta">Original vs mine — After Effects</span></span>
-            <span class="arrow">→</span>
-          </a>
-          <a class="project-row" href="https://www.instagram.com/reel/DbqJcLtCtTM/" target="_blank" rel="noopener">
-            <span class="tc mono"></span>
-            <span class="thumb" style="--thumb-a:#2a1d17; --thumb-b:#120e0c;"><img src="backbone.jpg"
-                alt="pratham sagar edit workflow thumbnail" onerror="this.remove()"><span class="play"></span><span
-                class="tformat mono">SHORT</span></span>
-            <span><span class="ptitle">Education is the backbone of India</span><span class="pmeta">Podcast clip to a short mini video</span></span>
-            <span class="arrow">→</span>
-          </a>
-          <a class="project-row"
-            href="https://www.instagram.com/reel/DX1ZjoyDxVg/?igsh=ajl4YzQ5aWE5cnpx&igsi=ajl4YzQ5aWE5cnpx"
-            target="_blank" rel="noopener">
-            <span class="tc mono"></span>
-            <span class="thumb" style="--thumb-a:#2a1d17; --thumb-b:#120e0c;"><img src="corpreat.png"
-                alt="corporate style video editing thumbnail" onerror="this.remove()"><span class="play"></span><span
-                class="tformat mono">DOC</span></span>
-            <span><span class="ptitle">Corporate-style video editing</span><span class="pmeta"> Long Form — Cinematic
-                documentary,
-                for corporate office</span></span>
-            <span class="arrow">→</span>
-          </a>
-          <a class="project-row"
-            href="https://www.instagram.com/reel/Da5OLE6vdBE/?igsh=MXB2eDYyZG5qMTdrZQ==&igsi=MXB2eDYyZG5qMTdrZQ=="
-            target="_blank" rel="noopener">
-            <span class="tc mono"></span>
-            <span class="thumb" style="--thumb-a:#2a1d17; --thumb-b:#120e0c;"><img
-                src="visa master changes v3  .mp4.00_00_26_38.Still001.jpg" alt="viral promotion edit thumbnail"
-                onerror="this.remove()"><span class="play"></span><span class="tformat mono">DOC</span></span>
-            <span><span class="ptitle">Viral promotion edit</span><span class="pmeta">Long Form — Cinematic documentary,
-                second 2 minutes</span></span>
-            <span class="arrow">→</span>
+        <div class="project-grid">
+          <div class="pcard" role="button" tabindex="0" data-preview="previews/pratham-sagar.mp4" data-ig="https://www.instagram.com/reel/Db7uBwGFsPn/" data-title="Pratham Sagar — edit workflow">
+            <div class="pthumb">
+              <img src="the edit.jpg" alt="Education is back bone of india thumbnail" loading="lazy" onerror="this.remove()">
+              <span class="pbadge mono">REEL</span>
+              <span class="pplay"></span>
+              <span class="pinfo"><span class="ptitle">Pratham Sagar — edit workflow</span><span class="pmeta">Podcast intro — Premiere Pro &amp; AI</span></span>
+            </div>
+          </div>
+          <div class="pcard" role="button" tabindex="0" data-preview="previews/ps-rajput.mp4" data-ig="https://www.youtube.com/shorts/zJ4I5496MFQ" data-title="PS Rajput — intro re-edit">
+            <div class="pthumb">
+              <img src="orignal vs me.jpg" alt="ps rajput intro reedite thumbnail" loading="lazy" onerror="this.remove()">
+              <span class="pbadge mono">REEL</span>
+              <span class="pplay"></span>
+              <span class="pinfo"><span class="ptitle">PS Rajput — intro re-edit</span><span class="pmeta">Original vs mine — After Effects</span></span>
+            </div>
+          </div>
+          <div class="pcard" role="button" tabindex="0" data-preview="previews/backbone.mp4" data-ig="https://www.instagram.com/reel/DbqJcLtCtTM/" data-title="Education is the backbone of India">
+            <div class="pthumb">
+              <img src="backbone.jpg" alt="Education is the backbone of India thumbnail" loading="lazy" onerror="this.remove()">
+              <span class="pbadge mono">SHORT</span>
+              <span class="pplay"></span>
+              <span class="pinfo"><span class="ptitle">Education is the backbone of India</span><span class="pmeta">Podcast clip to a short mini video</span></span>
+            </div>
+          </div>
+          <div class="pcard" role="button" tabindex="0" data-preview="previews/viral-promotion.mp4" data-ig="https://www.instagram.com/reel/Da5OLE6vdBE/" data-title="Viral promotion edit">
+            <div class="pthumb">
+              <img src="visa master changes v3  .mp4.00_00_26_38.Still001.jpg" alt="viral promotion edit thumbnail" loading="lazy" onerror="this.remove()">
+              <span class="pbadge mono">DOC</span>
+              <span class="pplay"></span>
+              <span class="pinfo"><span class="ptitle">Viral promotion edit</span><span class="pmeta">Long Form — Cinematic documentary, second 2 minutes</span></span>
+            </div>
+          </div>
+          <div class="pcard wide" role="button" tabindex="0" data-preview="previews/corporate.mp4" data-ig="https://www.instagram.com/reel/DX1ZjoyDxVg/" data-title="Corporate-style video editing">
+            <div class="pthumb">
+              <img src="corpreat.png" alt="corporate style video editing thumbnail" loading="lazy" onerror="this.remove()">
+              <span class="pbadge mono">DOC</span>
+              <span class="pplay"></span>
+              <span class="pinfo"><span class="ptitle">Corporate-style video editing</span><span class="pmeta">Long Form — Cinematic documentary, for corporate office</span></span>
+            </div>
+          </div>
+          <a class="pcta" href="https://instagram.com/krishgarg_edits" target="_blank" rel="noopener">
+            <h3>More edits<br>on Instagram</h3>
+            <p>Reels, shorts and long-form cuts, updated regularly.</p>
+            <span>Watch more →</span>
           </a>
         </div>
       </div>
@@ -1142,12 +1020,103 @@
     </div>
   </footer>
 
+    <div class="vmodal" id="vmodal" aria-hidden="true">
+    <div class="vbox" id="vbox">
+      <button class="vclose" id="vclose" aria-label="Close video">✕</button>
+      <div id="vslot"></div>
+      <a class="vopen" id="vopen" href="#" target="_blank" rel="noopener">Open on Instagram ↗</a>
+    </div>
+  </div>
+
   <div class="letterbox-bottom"></div>
 
 <script>
     const hd = document.querySelector('header'), tg = document.querySelector('.nav-toggle');
     tg.addEventListener('click', () => tg.setAttribute('aria-expanded', hd.classList.toggle('open')));
     document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', () => { hd.classList.remove('open'); tg.setAttribute('aria-expanded', 'false'); }));
+    /* Project previews: hover plays a muted clip, click opens the video in a popup */
+    (function () {
+      const canHover = matchMedia('(hover:hover)').matches;
+      const modal = document.getElementById('vmodal'), box = document.getElementById('vbox'),
+            slot = document.getElementById('vslot'), openLink = document.getElementById('vopen');
+      let lastCard = null;
+      // Returns the YouTube video id for shorts / watch / youtu.be links, else null
+      function ytId(u) {
+        const m = (u || '').match(/(?:youtube\.com\/(?:shorts\/|watch\?(?:.*&)?v=|embed\/)|youtu\.be\/)([\w-]{11})/);
+        return m ? m[1] : null;
+      }
+
+      document.querySelectorAll('.pcard').forEach(card => {
+        const thumb = card.querySelector('.pthumb');
+        let v = null, failed = false;
+        function start() {
+          const yid = ytId(card.dataset.ig);
+          if (yid) {
+            if (!v) {
+              v = document.createElement('iframe');
+              v.src = 'https://www.youtube.com/embed/' + yid + '?autoplay=1&mute=1&controls=0&loop=1&playlist=' + yid + '&playsinline=1&rel=0&modestbranding=1&disablekb=1';
+              v.allow = 'autoplay; encrypted-media'; v.tabIndex = -1; v.setAttribute('aria-hidden', 'true');
+              v.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .4s';
+              const f = v; f.addEventListener('load', () => setTimeout(() => { if (!f.isConnected) return; f.style.opacity = 1; thumb.classList.add('is-playing'); }, 600));
+              thumb.appendChild(v);
+            }
+            return;
+          }
+          if (failed || !card.dataset.preview) return;
+          if (!v) {
+            v = document.createElement('video');
+            v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'auto';
+            v.src = card.dataset.preview;
+            v.addEventListener('error', () => { failed = true; v.remove(); v = null; });
+            v.addEventListener('playing', () => thumb.classList.add('is-playing'));
+            thumb.insertBefore(v, thumb.firstChild.nextSibling);
+          }
+          v.play().catch(() => {});
+        }
+        function stop() {
+          if (!v) return;
+          if (v.tagName === 'IFRAME') { v.remove(); v = null; thumb.classList.remove('is-playing'); return; }
+          v.pause(); v.currentTime = 0; thumb.classList.remove('is-playing');
+        }
+        if (canHover) { card.addEventListener('mouseenter', start); card.addEventListener('mouseleave', stop); }
+        card.addEventListener('focus', start); card.addEventListener('blur', stop);
+        card.addEventListener('click', () => openModal(card));
+        card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); } });
+      });
+
+      function openModal(card) {
+        lastCard = card;
+        const ig = card.dataset.ig, full = card.dataset.full, wide = card.classList.contains('wide');
+        box.classList.toggle('landscape', wide);
+        slot.innerHTML = '';
+        if (full) {
+          const v = document.createElement('video');
+          v.className = 'vframe'; v.src = full; v.controls = true; v.autoplay = true; v.playsInline = true;
+          slot.appendChild(v);
+        } else if (ig) {
+          const f = document.createElement('iframe'), yid = ytId(ig);
+          f.className = 'vframe';
+          f.src = yid ? 'https://www.youtube.com/embed/' + yid + '?autoplay=1&rel=0&playsinline=1'
+                      : ig.split('?')[0].replace(/\/?$/, '/') + 'embed/';
+          f.allow = 'autoplay; encrypted-media; fullscreen'; f.allowFullscreen = true; f.loading = 'lazy';
+          slot.appendChild(f);
+        } else {
+          slot.innerHTML = '<div class="vsoon">Full video coming soon.</div>';
+        }
+        openLink.style.display = ig ? 'block' : 'none';
+        if (ig) { openLink.href = ig; openLink.textContent = ytId(ig) ? 'Open on YouTube ↗' : 'Open on Instagram ↗'; }
+        modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal() {
+        modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true');
+        slot.innerHTML = ''; document.body.style.overflow = '';
+        if (lastCard) lastCard.focus();
+      }
+      document.getElementById('vclose').addEventListener('click', closeModal);
+      modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+    })();
   </script>
 </body>
 
